@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-MENTOR AI 2026 | Định hướng nghề nghiệp thông minh</title>
+    <link rel="stylesheet" href="ai-impact-score.css">
+    <link rel="stylesheet" href="animated-background.css">
+    <link rel="stylesheet" href="auth-system.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles-enterprise.css">
+    <link rel="stylesheet" href="career-modal.css">
+    <link rel="stylesheet" href="chatbot-v2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS bổ sung để hỗ trợ tính năng Modal và Clickable */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px); /* Tăng độ mờ cho chuyên nghiệp */
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            max-width: 650px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalSlideUp 0.3s ease-out;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        @keyframes modalSlideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close-modal {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-400);
+            transition: color 0.3s;
+        }
+        .close-modal:hover { color: var(--danger); }
+
+        /* FAQ Styling */
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-100);
+            border-radius: 0.8rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-question {
+            padding: 1.2rem;
+            background: var(--gray-50);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        .faq-item.active { border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .faq-item.active .faq-answer { padding: 1.2rem; max-height: 300px; border-top: 1px solid var(--gray-100); }
+        .faq-item.active i { transform: rotate(180deg); color: var(--primary); }
+
+        /* Guide Step Styling */
+        .guide-box { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+        .guide-num { 
+            width: 35px; height: 35px; background: var(--gradient-primary); color: white; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            flex-shrink: 0; font-weight: 800; font-size: 0.9rem;
+        }
+
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-100);
+            padding-bottom: 1.5rem;
+        }
+        .team-logo-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        .team-member-tag {
+            display: inline-block;
+            background: var(--gray-100);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+        .clickable-card {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .clickable-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Subject checkbox styling */
+        .subject-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .subject-checkbox-item {
+            position: relative;
+        }
+        
+        .subject-checkbox-item input[type="checkbox"] {
+            display: none;
+        }
+        
+        .subject-checkbox-item label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .subject-checkbox-item input[type="checkbox"]:checked + label {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .subject-checkbox-item label:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .subject-checkbox-item .subject-icon {
+            font-size: 1.5rem;
+        }
+        
+        .subject-checkbox-item .subject-name {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        
+        .subject-checkbox-item input[type="checkbox"]:checked + label .subject-name {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <span>V-MENTOR AI</span>
+                    <span class="badge">2026</span>
+                </div>
+                
+                <nav class="nav">
+                    <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Trang chủ</a>
+                    <a href="javascript:void(0)" class="nav-link" onclick="openModal('guideModal')"><i class="fas fa-book"></i> Hướng dẫn</a>
+                    <a href="javascript:void(0)" class="nav-link" onclick="openModal('faqModal')"><i class="fas fa-question-circle"></i> FAQ</a>
+                    <a href="javascript:void(0)" class="nav-link" onclick="openModal('teamModal')"><i class="fas fa-info-circle"></i> Giới thiệu</a>
+                </nav>
+                
+                <div class="header-actions">
+    <a href="javascript:void(0)" class="btn btn-outline" onclick="openModal('guideModal')">
+        <i class="fas fa-book"></i> Hướng dẫn
+    </a>
+    
+    <!-- ✅ LOGIN BUTTON - Hiển thị khi chưa đăng nhập -->
+    <button id="loginBtn" class="btn btn-primary" onclick="AuthSystem.openAuthModal('login')">
+        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+    </button>
+    
+    <!-- ✅ USER PROFILE DROPDOWN - Hiển thị khi đã đăng nhập -->
+    <div id="userProfileBtn" class="user-profile-btn" style="display: none;" onclick="AuthSystem.toggleUserDropdown()">
+        <div id="userAvatar" class="user-avatar">U</div>
+        <span id="userName" class="user-name">User</span>
+        <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: #9ca3af;"></i>
+        
+        <!-- Dropdown Menu -->
+        <div id="userDropdown" class="user-dropdown">
+            <div class="dropdown-header">
+                <div class="dropdown-user-info">
+                    <div class="dropdown-avatar">
+                        <span id="dropdownAvatar">U</span>
+                    </div>
+                    <div class="dropdown-user-details">
+                        <h4 id="dropdownName">User Name</h4>
+                        <p id="dropdownEmail">user@email.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dropdown-menu">
+                <a href="javascript:void(0)" class="dropdown-item" onclick="viewProfile()">
+                    <i class="fas fa-user"></i>
+                    Hồ sơ của tôi
+                </a>
+                <a href="javascript:void(0)" class="dropdown-item" onclick="viewMyResults()">
+                    <i class="fas fa-chart-bar"></i>
+                    Kết quả test
+                </a>
+                <a href="javascript:void(0)" class="dropdown-item" onclick="editProfile()">
+                    <i class="fas fa-cog"></i>
+                    Cài đặt
+                </a>
+                
+                <div class="dropdown-divider"></div>
+                
+                <a href="javascript:void(0)" class="dropdown-item logout" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Đăng xuất
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="progress-bar-sticky" id="progressBarSticky" style="display:none;">
+        <div class="container">
+            <div class="progress-info">
+                <span class="progress-label">Tiến độ hoàn thành</span>
+                <span class="progress-percent" id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stepsIndicator" style="display:none;">
+        <div class="steps-indicator">
+            <div class="step active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Tố chất</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Cảm xúc</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Kỹ năng</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Năng lực</div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-circle">5</div>
+                <div class="step-label">Hệ đào tạo</div>
+            </div>
+            <div class="step" data-step="6">
+                <div class="step-circle">6</div>
+                <div class="step-label">Chọn ngành</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+       <div class="hero-bg">
+        <!-- Gradient Orbs -->
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="gradient-orb orb-4"></div>
+        <div class="gradient-orb orb-5"></div>
+        <div class="gradient-orb orb-6"></div>
+        
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- Mesh Lines -->
+        <div class="mesh-line"></div>
+        <div class="mesh-line"></div>
+        <div class="mesh-line"></div>
+        
+        <!-- Glow Spots -->
+        <div class="glow-spot"></div>
+        <div class="glow-spot"></div>
+        
+        <!-- Stars -->
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+      </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Định hướng nghề nghiệp
+                    <span class="gradient-text">thông minh với AI</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Khám phá tiềm năng của bạn thông qua bài test Holland, đánh giá EQ và phân tích kỹ năng sống. 
+                    Nhận gợi ý ngành nghề phù hợp nhất cho tương lai.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">110+</div>
+                        <div class="stat-label">Câu hỏi chuyên sâu</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Ngành nghề phân tích</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Độ chính xác AI</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2026</div>
+                        <div class="stat-label">Dữ liệu cập nhật</div>
+                    </div>
+                </div>
+                
+                <div class="hero-cta">
+                    <button class="btn btn-large btn-primary" onclick="startTest()">
+                        <i class="fas fa-rocket"></i> Bắt đầu ngay
+                    </button>
+                    <button class="btn btn-large btn-outline" onclick="openModal('guideModal')">
+                        <i class="fas fa-info-circle"></i> Tìm hiểu thêm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="test-container" id="testContainer" style="display:none;">
+            <div class="test-step active" id="step1">
+                <div class="step-header">
+                    <h2 class="step-title"><i class="fas fa-dna"></i> Bước 1: Holland Test - Đánh giá tố chất nghề nghiệp</h2>
+                    <p class="step-desc">Khám phá sở thích và tố chất của bạn qua 60 câu hỏi dựa trên mô hình Holland RIASEC.</p>
+                </div>
+                <div class="test-content" id="hollandTest"></div>
+                <div class="step-footer" style="margin-top: 3rem; text-align: right;">
+                    <button class="btn btn-large btn-primary" onclick="nextStep()"><i class="fas fa-arrow-right"></i> Tiếp theo</button>
+                </div>
+            </div>
+
+            <div class="test-step" id="step2">
+                <div class="step-header">
+                    <h2 class="step-title"><i class="fas fa-heart"></i> Bước 2: EQ Test - Đánh giá trí tuệ cảm xúc</h2>
+                    <p class="step-desc">Đánh giá khả năng nhận biết, kiểm soát cảm xúc và kỹ năng xã hội của bạn.</p>
+                </div>
+                <div class="test-content" id="eqTest"></div>
+                <div class="step-footer" style="margin-top: 3rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-large btn-outline" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                    <button class="btn btn-large btn-primary" onclick="nextStep()"><i class="fas fa-arrow-right"></i> Tiếp theo</button>
+                </div>
+            </div>
+
+            <div class="test-step" id="step3">
+                <div class="step-header">
+                    <h2 class="step-title"><i class="fas fa-tools"></i> Bước 3: Đánh giá kỹ năng sống</h2>
+                    <p class="step-desc">Đánh giá các kỹ năng mềm quan trọng cho môi trường làm việc hiện đại.</p>
+                </div>
+                <div class="test-content" id="lifeskillsTest"></div>
+                <div class="step-footer" style="margin-top: 3rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-large btn-outline" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                    <button class="btn btn-large btn-primary" onclick="nextStep()"><i class="fas fa-arrow-right"></i> Tiếp theo</button>
+                </div>
+            </div>
+
+            <div class="test-step" id="step4">
+                <div class="step-header">
+                    <h2 class="step-title"><i class="fas fa-graduation-cap"></i> Bước 4: Năng lực môn học</h2>
+                    <p class="step-desc">Chọn ít nhất 2 môn học mà bạn tự tin nhất. Điều này giúp AI đánh giá chính xác hơn ngành nghề phù hợp.</p>
+                </div>
+                <div class="test-content">
+                    <div class="subject-checkbox-grid" id="subjectCheckboxes"></div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0.5rem;">
+                        <i class="fas fa-lightbulb"></i> <strong>Lưu ý:</strong> Chọn những môn bạn có điểm cao hoặc cảm thấy tự tin nhất, không nhất thiết phải là môn yêu thích.
+                    </div>
+                </div>
+                <div class="step-footer" style="margin-top: 3rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-large btn-outline" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                    <button class="btn btn-large btn-primary" onclick="nextStep()" id="nextStepBtn4"><i class="fas fa-arrow-right"></i> Tiếp theo</button>
+                </div>
+            </div>
+
+            <div class="test-step" id="step5">
+                <div class="step-header">
+                    <h2 class="step-title"><i class="fas fa-school"></i> Bước 5: Chọn hệ đào tạo</h2>
+                    <p class="step-desc">Chọn con đường học tập phù hợp với bạn.</p>
+                </div>
+                <div class="test-content" id="educationSelection"></div>
+                <div class="step-footer" style="margin-top: 3rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-large btn-outline" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                    <button class="btn btn-large btn-primary" onclick="nextStep()"><i class="fas fa-arrow-right"></i> Tiếp theo</button>
+                </div>
+            </div>
+
+            <div class="test-step" id="step6">
+                <div class="step-header">
+                    <h2 class="step-title"><i class="fas fa-briefcase"></i> Bước 6: Chọn ngành nghề quan tâm</h2>
+                    <p class="step-desc">Dựa trên kết quả, hệ thống gợi ý các ngành phù hợp. Chọn 1 ngành để xem phân tích chi tiết.</p>
+                </div>
+                <div class="test-content" id="careerSelection"></div>
+                <div class="step-footer" style="margin-top: 3rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-large btn-outline" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Quay lại</button>
+                    <button class="btn btn-large btn-success" onclick="analyzeCareer()" id="analyzeBtn" disabled><i class="fas fa-brain"></i> Phân tích AI</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-container" id="resultsContainer" style="display:none;"></div>
+    </main>
+
+    <div id="guideModal" class="modal" onclick="closeModalOutside(event, 'guideModal')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('guideModal')">&times;</span>
+            <h2 style="color: var(--primary-dark); margin-bottom: 1.5rem;"><i class="fas fa-map-signs"></i> Hướng dẫn sử dụng</h2>
+            <div class="guide-box">
+                <div class="guide-num">1</div>
+                <div><strong>Làm bài đánh giá:</strong> Lần lượt hoàn thành Holland Test (Tố chất), EQ (Cảm xúc), Kỹ năng sống và Năng lực môn học.</div>
+            </div>
+            <div class="guide-box">
+                <div class="guide-num">2</div>
+                <div><strong>Chọn lộ trình:</strong> Chọn hệ đào tạo Trung cấp hoặc THPT để AI tính toán con đường sự nghiệp tương ứng.</div>
+            </div>
+            <div class="guide-box">
+                <div class="guide-num">3</div>
+                <div><strong>Nhận kết quả:</strong> Bấm "Phân tích AI" để nhận bản báo cáo chi tiết về mức lương, trường học và lộ trình thăng tiến đến 2030.</div>
+            </div>
+            <p style="background: var(--gray-50); padding: 1rem; border-radius: 0.5rem; font-size: 0.9rem; color: var(--gray-500);">
+                <i class="fas fa-info-circle"></i> Lưu ý: Bạn có thể liên hệ hotline <strong>0354738643</strong> nếu gặp sự cố kỹ thuật.
+            </p>
+        </div>
+    </div>
+
+    <div id="faqModal" class="modal" onclick="closeModalOutside(event, 'faqModal')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('faqModal')">&times;</span>
+            <h2 style="color: var(--primary-dark); margin-bottom: 1.5rem;"><i class="fas fa-question-circle"></i> Câu hỏi thường gặp</h2>
+            
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Kết quả AI có đáng tin cậy không? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Hệ thống sử dụng mô hình Holland quốc tế kết hợp với dữ liệu việc làm thực tế tại Việt Nam 2026, độ chính xác đạt trên 95%.</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Làm sao để nhận hỗ trợ trực tiếp? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Bạn có thể gọi số 0354738643 hoặc gửi email về địa chỉ: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="06474f5f495348415354533436343346616b676f6a2865696b">[email&#160;protected]</a> để gặp chuyên viên tư vấn.</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Tôi có phải trả phí không? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Hoàn toàn MIỄN PHÍ. Đây là dự án hỗ trợ cộng đồng của đội ngũ Sonadezi 01 nhằm giúp các bạn trẻ định hướng đúng đắn.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="teamModal" class="modal" onclick="closeModalOutside(event, 'teamModal')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('teamModal')">&times;</span>
+            <div class="team-info-header">
+                <div class="team-logo-circle"><i class="fas fa-users"></i></div>
+                <div>
+                    <h2 style="color: var(--primary-dark); margin-bottom: 0.2rem;">Sonadezi 01</h2>
+                    <p style="color: var(--gray-500); font-weight: 500;">Đội ngũ phát triển dự án V-MENTOR AI 2026</p>
+                </div>
+            </div>
+            <div class="team-body">
+                <h4 style="margin-bottom: 0.8rem; color: var(--gray-700);">Sứ mệnh dự án</h4>
+                <p style="line-height: 1.6; color: var(--gray-600); margin-bottom: 1.5rem;">
+                    "Sonadezi 01 mang đến giải pháp hướng nghiệp tối ưu dựa trên trí tuệ nhân tạo, giúp học sinh tự tin lựa chọn lộ trình phù hợp nhất."
+                </p>
+                <h4 style="margin-bottom: 0.8rem; color: var(--gray-700);">Liên hệ chính thức</h4>
+                <p style="color: var(--primary-dark); font-weight: 600; margin-bottom: 1rem;">
+                    <div style="margin-top: 10px;">
+                       <a href="mailto:AIYONGGURU2025@gmail.com" 
+                          style="color: #4F46E5; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
+                          📧 AIYONGGURU2025@gmail.com
+                       </a>
+                    </div> 
+                <i class="fas fa-phone-alt"></i> 0354738643
+                </p>
+                <h4 style="margin-bottom: 0.8rem; color: var(--gray-700);">Thành viên thực hiện</h4>
+                <div id="teamMembersList">
+                    <span class="team-member-tag">Trưởng nhóm: Lưu Xuân Đức</span>
+                    <span class="team-member-tag">Phát triển AI: Trần Minh Tiến</span>
+                    <span class="team-member-tag">Thiết kế UI/UX: Phạm Thanh Tuấn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-widget">
+        <button class="chatbot-toggle" onclick="toggleChatbot()"><i class="fas fa-comments"></i></button>
+        <div class="chatbot-window" id="chatbotWindow" style="display:none;">
+            <div class="chatbot-header">
+                <h4><i class="fas fa-robot"></i> AI Tư vấn</h4>
+                <button class="chatbot-close" onclick="closeChatbot()" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 1.2rem;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages" style="flex: 1; overflow-y: auto; padding: 1rem;">
+                <div class="bot-message" style="margin: 1rem 0; display: flex; gap: 0.5rem;">
+                    <i class="fas fa-robot"></i>
+                    <p style="background: #f3f4f6; padding: 0.75rem; border-radius: 0.5rem; max-width: 80%;">Xin chào! Bạn cần hỗ trợ gì về hướng nghiệp không?</p>
+                </div>
+            </div>
+            <div class="chatbot-input" style="padding: 1rem; border-top: 1px solid #e5e7eb; display: flex; gap: 0.5rem;">
+                <input type="text" placeholder="Nhập câu hỏi..." id="chatbotInput" style="flex: 1; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 0.5rem;">
+                <button onclick="sendChatMessage()" style="padding: 0.75rem 1.5rem; background: var(--gradient-primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div class="footer-section">
+                    <h4>V-MENTOR AI 2026</h4>
+                    <p>Hệ thống tư vấn hướng nghiệp thông minh</p>
+                    <p style="margin-top:1rem; opacity:0.7;">Phát triển bởi <strong>Đội Sonadezi 01</strong></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liên kết nhanh</h4>
+                    <ul style="list-style: none;">
+                        <li><a href="javascript:void(0)" onclick="openModal('guideModal')">Hướng dẫn</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('faqModal')">Câu hỏi thường gặp</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('teamModal')">Về chúng tôi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ trợ 24/7</h4>
+                    <p>
+                        <div style="margin-bottom: 5px;">
+                          <a href="mailto:AIYONGGURU2025@gmail.com" 
+                              style="color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                              📧 AIYONGGURU2025@gmail.com
+                          </a>
+                        </div>
+                    </p>
+                    <p><i class="fas fa-phone"></i> 0354738643</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Sonadezi College, Biên Hòa</p>
+                </div>
+            </div>
+            <div class="footer-bottom" style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>&copy; 2026 V-Mentor AI & Sonadezi 01. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Modal & FAQ Logic
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function closeModalOutside(event, id) { if (event.target == document.getElementById(id)) closeModal(id); }
+        
+        function toggleFAQ(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+    
+    <script src="data-careers-p1.js"></script>
+    <script src="data-tests-enterprise.js"></script>
+    <script src="app-enterprise.js"></script>
+    <script src="career-comparison-feature.js"></script>
+    <script src="ai-impact-data.js"></script>
+    <script src="ai-impact-score.js"></script>
+    <script src="career-modal.js"></script>
+    
+    <script src="chatbot.js"></script>
+     <!-- Auth Modal Overlay -->
+<div id="authOverlay" class="auth-overlay">
+    <div class="auth-container">
+        <!-- Header -->
+        <div class="auth-header">
+            <button class="auth-close-btn" onclick="AuthSystem.closeAuthModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="auth-icon">🎓</div>
+            <h2 class="auth-title">V-MENTOR AI</h2>
+            <p class="auth-subtitle">Hệ thống định hướng nghề nghiệp thông minh</p>
+        </div>
+        
+        <!-- Body -->
+        <div class="auth-body">
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" onclick="AuthSystem.switchTab('login')">
+                    Đăng nhập
+                </button>
+                <button class="auth-tab" data-tab="register" onclick="AuthSystem.switchTab('register')">
+                    Đăng ký
+                </button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        class="form-input" 
+                        placeholder="your@email.com"
+                        required
+                    >
+                    <div id="loginEmailError" class="form-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">
+                        <i class="fas fa-lock"></i> Mật khẩu
+                    </label>
+                    <input 
+                        type="password" 
+                        id="loginPassword" 
+                        class="form-input" 
+                        placeholder="••••••••"
+                        required
+                    >
+                    <div id="loginPasswordError" class="form-error"></div>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Ghi nhớ đăng nhập</label>
+                </div>
+                
+                <button type="submit" class="auth-btn auth-btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Đăng nhập
+                    <div class="auth-loading">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+                
+                <div class="auth-divider">
+                    <span>hoặc</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google" onclick="loginWithGoogle()">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn facebook" onclick="loginWithFacebook()">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Chưa có tài khoản? 
+                    <a href="javascript:void(0)" onclick="AuthSystem.switchTab('register')">Đăng ký ngay</a>
+                </div>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="fullName" class="form-label">
+                        <i class="fas fa-user"></i> Họ và tên
+                    </label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        class="form-input" 
+                        placeholder="Nguyễn Văn A"
+                        required
+                    >
+                    <div id="fullNameError" class="form-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-input" 
+                        placeholder="your@email.com"
+                        required
+                    >
+                    <div id="emailError" class="form-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock"></i> Mật khẩu
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="••••••••"
+                        required
+                        oninput="checkPasswordStrength()"
+                    >
+                    <div class="password-strength">
+                        <div id="passwordStrengthBar" class="password-strength-bar"></div>
+                    </div>
+                    <div id="passwordStrengthText" class="password-strength-text"></div>
+                    <div id="passwordError" class="form-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">
+                        <i class="fas fa-lock"></i> Xác nhận mật khẩu
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        class="form-input" 
+                        placeholder="••••••••"
+                        required
+                    >
+                    <div id="confirmPasswordError" class="form-error"></div>
+                </div>
+                
+                <button type="submit" class="auth-btn auth-btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Đăng ký
+                    <div class="auth-loading">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+                
+                <div class="auth-divider">
+                    <span>hoặc</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google" onclick="loginWithGoogle()">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn facebook" onclick="loginWithFacebook()">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Đã có tài khoản? 
+                    <a href="javascript:void(0)" onclick="AuthSystem.switchTab('login')">Đăng nhập</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+        
+   
+    <script src="developer-notice.js"></script>
+    <script src="auth-system.js"></script>
+    <script src="auth-integration.js"></script>
+   
+
+   
+
+<!-- Welcome Message -->
+<div id="welcomeMessage" class="welcome-message">
+    <h3><i class="fas fa-check-circle"></i> Thành công!</h3>
+    <p>Chào mừng bạn đến với V-Mentor AI!</p>
+</div>
+
+</body>
+</html>

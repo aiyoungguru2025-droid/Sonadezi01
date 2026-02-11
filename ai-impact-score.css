@@ -1,0 +1,529 @@
+/* ==================== AI IMPACT SCORE FEATURE ==================== */
+/* Đánh giá nguy cơ bị AI thay thế - V-MENTOR AI 2026 */
+
+/* ==================== AI IMPACT SECTION ==================== */
+.ai-impact-section {
+    background: linear-gradient(135deg, #fef3c7, #fed6e3);
+    border: 2px solid #fde68a;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.ai-impact-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #fde68a;
+}
+
+.ai-impact-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+    animation: robotPulse 2s ease-in-out infinite;
+}
+
+@keyframes robotPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.ai-impact-title h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 0.25rem;
+}
+
+.ai-impact-title p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* ==================== AI IMPACT METER ==================== */
+.ai-impact-meter {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.impact-score-display {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.impact-score-circle {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Low risk - Green */
+.impact-score-circle.low {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* Medium risk - Yellow */
+.impact-score-circle.medium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+/* High risk - Red */
+.impact-score-circle.high {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.impact-percentage {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+}
+
+.impact-label {
+    font-size: 0.75rem;
+    color: white;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.impact-score-info {
+    flex: 1;
+}
+
+.impact-risk-level {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.impact-risk-level.low {
+    color: #10b981;
+}
+
+.impact-risk-level.medium {
+    color: #f59e0b;
+}
+
+.impact-risk-level.high {
+    color: #ef4444;
+}
+
+.impact-description {
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 0.9375rem;
+}
+
+/* ==================== IMPACT PROGRESS BAR ==================== */
+.impact-progress-container {
+    margin-bottom: 1.5rem;
+}
+
+.impact-progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.progress-title {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.progress-value {
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.progress-value.low {
+    color: #10b981;
+}
+
+.progress-value.medium {
+    color: #f59e0b;
+}
+
+.progress-value.high {
+    color: #ef4444;
+}
+
+.impact-progress-bar {
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.impact-progress-fill {
+    height: 100%;
+    border-radius: 1rem;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.impact-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.impact-progress-fill.low {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.impact-progress-fill.medium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.impact-progress-fill.high {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+/* ==================== RISK INDICATORS ==================== */
+.impact-indicators {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.impact-indicator {
+    text-align: center;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.75rem;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s;
+}
+
+.impact-indicator:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.indicator-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.indicator-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.indicator-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.indicator-value.low {
+    color: #10b981;
+}
+
+.indicator-value.medium {
+    color: #f59e0b;
+}
+
+.indicator-value.high {
+    color: #ef4444;
+}
+
+/* ==================== AI SURVIVAL TIPS ==================== */
+.ai-survival-tips {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border-left: 4px solid #667eea;
+}
+
+.survival-tips-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.survival-tips-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.survival-tip-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f0f9ff, #fef3c7);
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+}
+
+.survival-tip-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.tip-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.tip-content {
+    flex: 1;
+}
+
+.tip-title {
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+    font-size: 0.9375rem;
+}
+
+.tip-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* ==================== SKILLS TO DEVELOP ==================== */
+.skills-to-develop {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f0f9ff, #e0e7ff);
+    border-radius: 1rem;
+    border: 2px solid #dbeafe;
+}
+
+.skills-header {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem;
+    background: white;
+    border-radius: 0.75rem;
+    border-left: 3px solid #667eea;
+    transition: all 0.3s;
+}
+
+.skill-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.skill-item i {
+    color: #667eea;
+    font-size: 1.25rem;
+}
+
+.skill-name {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9375rem;
+}
+
+/* ==================== AI IMPACT BADGE ==================== */
+.ai-impact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.ai-impact-badge.low {
+    background: linear-gradient(135deg, #10b98115, #34d39915);
+    border: 1px solid #10b98140;
+    color: #065f46;
+}
+
+.ai-impact-badge.medium {
+    background: linear-gradient(135deg, #f59e0b15, #fbbf2415);
+    border: 1px solid #f59e0b40;
+    color: #92400e;
+}
+
+.ai-impact-badge.high {
+    background: linear-gradient(135deg, #ef444415, #f8717115);
+    border: 1px solid #ef444440;
+    color: #991b1b;
+}
+
+.ai-impact-badge i {
+    font-size: 1rem;
+}
+
+/* ==================== FUTURE OUTLOOK ==================== */
+.future-outlook {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 1rem;
+    border: 2px solid #e5e7eb;
+}
+
+.outlook-header {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #374151;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.outlook-timeline {
+    display: grid;
+    gap: 1rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.75rem;
+    border-left: 3px solid #667eea;
+}
+
+.timeline-year {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-title {
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.timeline-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .impact-score-display {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .impact-indicators {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ai-impact-icon {
+        font-size: 2rem;
+    }
+    
+    .impact-score-circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .impact-percentage {
+        font-size: 2rem;
+    }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ai-impact-section {
+    animation: fadeInUp 0.5s ease-out;
+}
