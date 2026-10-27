@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V-MENTOR AI 2026 | Định hướng nghề nghiệp thông minh</title>
+    <!-- ✅ LIGHT MODE DEFAULT - chạy trước CSS để tránh flash tối -->
+    <script>
+        (function() {
+            var saved = localStorage.getItem('vmentor_theme');
+            if (saved === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('vmentor_theme', 'light');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="ai-impact-score.css">
     <link rel="stylesheet" href="animated-background.css">
     <link rel="stylesheet" href="auth-system.css">
@@ -12,6 +24,7 @@
     <link rel="stylesheet" href="styles-enterprise.css">
     <link rel="stylesheet" href="career-modal.css">
     <link rel="stylesheet" href="chatbot-v2.css">
+    <link rel="stylesheet" href="dark-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* CSS bổ sung để hỗ trợ tính năng Modal và Clickable */
@@ -226,7 +239,7 @@
                     </div>
                     <div class="dropdown-user-details">
                         <h4 id="dropdownName">User Name</h4>
-                        <p id="dropdownEmail">user@email.com</p>
+                        <p id="dropdownEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff8a8c9a8dbf9a929e9693d19c9092">[email&#160;protected]</a></p>
                     </div>
                 </div>
             </div>
@@ -359,16 +372,16 @@
                         <div class="stat-label">Câu hỏi chuyên sâu</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">200+</div>
+                        <div class="stat-number">30+</div>
                         <div class="stat-label">Ngành nghề phân tích</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">95%</div>
-                        <div class="stat-label">Độ chính xác AI</div>
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Hỗ trợ tư vấn AI</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">2026</div>
-                        <div class="stat-label">Dữ liệu cập nhật</div>
+                        <div class="stat-label">Dữ liệu liên tục cập nhật</div>
                     </div>
                 </div>
                 
@@ -495,12 +508,15 @@
             
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">Kết quả AI có đáng tin cậy không? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Hệ thống sử dụng mô hình Holland quốc tế kết hợp với dữ liệu việc làm thực tế tại Việt Nam 2026, độ chính xác đạt trên 95%.</div>
+                <div class="faq-answer">Hệ thống sử dụng mô hình Holland quốc tế kết hợp với dữ liệu việc làm thực tế tại Việt Nam 2026.</div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">Làm sao để nhận hỗ trợ trực tiếp? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Bạn có thể gọi số 0354738643 hoặc gửi email về địa chỉ: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="06474f5f495348415354533436343346616b676f6a2865696b">[email&#160;protected]</a> để gặp chuyên viên tư vấn.</div>
+                <div class="faq-answer">Bạn có thể gọi số 0354738643 hoặc gửi email về địa chỉ: 
+                    <a href="/cdn-cgi/l/email-protection#db9a928294959c9c8e898ee9ebe9ee9bbcb6bab2b7f5b8b4b6" style="color: #4F46E5; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
+                          📧 <span class="__cf_email__" data-cfemail="03424a5a4c4d44445651563133313643646e626a6f2d606c6e">[email&#160;protected]</span>
+                    </a> để gặp chuyên viên tư vấn.</div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
@@ -528,18 +544,19 @@
                 <h4 style="margin-bottom: 0.8rem; color: var(--gray-700);">Liên hệ chính thức</h4>
                 <p style="color: var(--primary-dark); font-weight: 600; margin-bottom: 1rem;">
                     <div style="margin-top: 10px;">
-                       <a href="mailto:AIYONGGURU2025@gmail.com" 
-                          style="color: #4F46E5; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
-                          📧 AIYONGGURU2025@gmail.com
+                       <a href="/cdn-cgi/l/email-protection#90d1d9c9dfded7d7c5c2c5a2a0a2a5d0f7fdf1f9fcbef3fffd" style="color: #4F46E5; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
+                          📧 <span class="__cf_email__" data-cfemail="dc9d958593929b9b898e89eeeceee99cbbb1bdb5b0f2bfb3b1">[email&#160;protected]</span>
                        </a>
                     </div> 
                 <i class="fas fa-phone-alt"></i> 0354738643
                 </p>
                 <h4 style="margin-bottom: 0.8rem; color: var(--gray-700);">Thành viên thực hiện</h4>
                 <div id="teamMembersList">
-                    <span class="team-member-tag">Trưởng nhóm: Lưu Xuân Đức</span>
-                    <span class="team-member-tag">Phát triển AI: Trần Minh Tiến</span>
-                    <span class="team-member-tag">Thiết kế UI/UX: Phạm Thanh Tuấn</span>
+                    <span class="team-member-tag">Project Manager: Lưu Xuân Đức</span>
+                    <span class="team-member-tag">Devloper: Trần Minh Tiến</span>
+                    <span class="team-member-tag">Idea Create: Nguyễn Thế Oanh</span>
+                    <span class="team-member-tag">Tester: Vũ Việt Hà</span>
+                    <span class="team-member-tag">Reseacher: Ngô Nguyễn Phước Lập</span>
                 </div>
             </div>
         </div>
@@ -585,9 +602,8 @@
                     <h4>Hỗ trợ 24/7</h4>
                     <p>
                         <div style="margin-bottom: 5px;">
-                          <a href="mailto:AIYONGGURU2025@gmail.com" 
-                              style="color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                              📧 AIYONGGURU2025@gmail.com
+                          <a href="/cdn-cgi/l/email-protection#c6878f9f89888181939493f4f6f4f386a1aba7afaae8a5a9ab" style="color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                              📧 <span class="__cf_email__" data-cfemail="03424a5a4c4d44445651563133313643646e626a6f2d606c6e">[email&#160;protected]</span>
                           </a>
                         </div>
                     </p>
@@ -601,7 +617,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Modal & FAQ Logic
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -610,7 +626,32 @@
         function toggleFAQ(element) {
             element.classList.toggle('active');
         }
+
+        // ✅ THEME TOGGLE - lưu lựa chọn người dùng
+        function toggleTheme(event) {
+            var html = document.documentElement;
+            var isDark = html.getAttribute('data-theme') === 'dark';
+            var next = isDark ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('vmentor_theme', next);
+        }
     </script>
+
+    <!-- ✅ Chặn trình duyệt tự chuyển tối theo system preference -->
+    <style>
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="dark"]) {
+                color-scheme: light;
+            }
+            html:not([data-theme="dark"]) body {
+                background-color: #f9fafb !important;
+                color: #1f2937 !important;
+            }
+            html:not([data-theme="dark"]) .header {
+                background: rgba(255,255,255,0.9) !important;
+            }
+        }
+    </style>
     
     <script src="data-careers-p1.js"></script>
     <script src="data-tests-enterprise.js"></script>
@@ -619,8 +660,9 @@
     <script src="ai-impact-data.js"></script>
     <script src="ai-impact-score.js"></script>
     <script src="career-modal.js"></script>
+    <script src="export-pdf.js"></script>
     
-    <script src="chatbot.js"></script>
+    <script src="chatbot-v3.js"></script>
      <!-- Auth Modal Overlay -->
 <div id="authOverlay" class="auth-overlay">
     <div class="auth-container">
@@ -794,28 +836,4 @@
                 
                 <div class="auth-footer">
                     Đã có tài khoản? 
-                    <a href="javascript:void(0)" onclick="AuthSystem.switchTab('login')">Đăng nhập</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-        
-   
-    <script src="developer-notice.js"></script>
-    <script src="auth-system.js"></script>
-    <script src="auth-integration.js"></script>
-   
-
-   
-
-<!-- Welcome Message -->
-<div id="welcomeMessage" class="welcome-message">
-    <h3><i class="fas fa-check-circle"></i> Thành công!</h3>
-    <p>Chào mừng bạn đến với V-Mentor AI!</p>
-</div>
-
-</body>
-</html>
+                    <a href="javascript:void(0)" onclick="Aut

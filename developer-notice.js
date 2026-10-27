@@ -122,7 +122,7 @@
                         <!-- Statistics -->
                         <div class="dev-stats">
                             <div class="dev-stat-item">
-                                <div class="dev-stat-number">10,000+</div>
+                                <div class="dev-stat-number">999+</div>
                                 <div class="dev-stat-label">Học sinh đã sử dụng</div>
                             </div>
                             <div class="dev-stat-item">
@@ -130,7 +130,7 @@
                                 <div class="dev-stat-label">Độ chính xác</div>
                             </div>
                             <div class="dev-stat-item">
-                                <div class="dev-stat-number">500+</div>
+                                <div class="dev-stat-number">30+</div>
                                 <div class="dev-stat-label">Ngành nghề phân tích</div>
                             </div>
                         </div>

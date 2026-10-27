@@ -935,9 +935,6 @@ function sendChatMessage() {
 }
 
 // ==================== UTILITIES ====================
-function exportPDF() {
-    alert('Tính năng xuất PDF đang được phát triển!');
-}
 
 function resetTest() {
     if (confirm('Bạn có chắc muốn làm lại bài test?')) {
